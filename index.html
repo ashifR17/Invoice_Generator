@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="layout">
+        <h1 class="section-header ">Online Invoice Generator</h1>
+        <p class="info">Billing your clients got super easy with this free online invoice generator. No more
+            downloading
+            or signing up required. Give your client details and generate a free PDF invoice online!</p>
+        <div class="d-flex pt-8 flex-sm-row invoice_gen ">
+            <div class="invoice_page flex-2 cards" id="invoice_root">
+                <div id="prt">
+                    <div class="d-flex invoice_main">
+                        <div class="d-flex invoice_main_head justify-content-between dark">
+                            <div onclick="fun()" class="invoice-editable-component company_name">Company Name</div>
+                            <div id="invoice"
+                                class="invoice-editable-component invoice-label text-right tdalign invoiced">INVOICE
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mb16">
+                            <div class="d-grid text-left">
+                                <div class="invoice-editable-component invoice-default-label mb2">123 your street</div>
+                                <div class="invoice-editable-component invoice-default-label mb2">Your town</div>
+                                <div class="invoice-editable-component invoice-default-label mb2">Address Line 3</div>
+                            </div>
+                            <div class="d-grid invoiced">
+                                <div class="invoice-editable-component invoice-default-label text-right mb2">13 May 2023
+                                </div>
+                                <div class="invoice-editable-component invoice-default-label text-right mb2">Invoice
+                                    2334889</div>
+                                <div class="invoice-editable-component invoice-default-label text-right mb2">PO
+                                    456001200</div>
+                            </div>
+
+                        </div>
+                        <div class="d-flex justify-content-between mb8">
+                            <div class="d-grid text-left">
+                                <div class="invoice-editable-component invoice-default-label mb2">(123) 456 789</div>
+                                <div class="invoice-editable-component invoice-default-label">email@yourcompany.com
+                                </div>
+                            </div>
+                            <div class="d-grid invoiced">
+                                <div class="invoice-editable-component invoice-default-label boldL text-right mb2">Att:
+                                    Ms. Jane Doe</div>
+                                <div class="invoice-editable-component invoice-default-label boldL text-right">Client
+                                    Company Name</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="invoice-divider">
+                        <hr>
+                    </div>
+                    <div class="invoice-editable-component-text-area"><span>Dear Ms. Jane
+                            Doe,</span><br><span></span><br><span>Please
+                            find below a cost-breakdown for the recent work completed. Please make payment at your
+                            earliest convenience, and
+                            do not hesitate to contact me with any questions.</span><br><span></span><br><span>Many
+                            thanks,</span><br><span>Your Name</span><br></div>
+                    <table id="tableid" class="invoice_table mt48" onchange="getTotal(this)">
+                        <thead class="bottom_border">
+                            <tr>
+                                <th class="number">#</th>
+                                <th class="description">Item Description</th>
+                                <th>Quantity</th>
+                                <th>
+                                    <div class="invoice-editable-component">Unit price (₹)</div>
+                                </th>
+                                <th>Line total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody" onchange="getTotal(this)">
+                            <tr>
+                                <td class="number">
+                                    <div class="invoice-editable  full-w tdalign " onclick="change(this)">1</div>
+                                </td>
+                                <td class="description">
+                                    <div id="item" class="invoice-editable  full-w tdalign " onclick="change(this)">Item
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="invoice-editable-component tdalign full-w" onclick="change(this)"
+                                        name="qty" onchange="calc(this)">1</div>
+                                </td>
+                                <td>
+                                    <div class="invoice-editable-component tdalign " onclick="change(this)" name="rate"
+                                        onchange="calc(this)">100</div>
+                                </td>
+                                <td>
+                                    <div class="total-cell">
+                                        <div name="amt"> 100</div><img class="remove-item" src="images/deleteicon.png"
+                                            alt="x" onclick="deleteRow(this)">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="add-new-item" onclick="addd()"><img class="add_icon" src="images/plus1.png" alt="+"
+                            class="mr4"><span>Add line item</span></div>
+                    <div class="invoice_totals mb-32 mt-24">
+                        <div class="d-flex justify-content-between mb6 total_content">
+                            <div class="invoice-editable-component sub-total ">Subtotal</div><span
+                                class="sub-total">₹<span id="total">100</span></span>
+                        </div>
+                        <div class="d-flex justify-content-between total_content">
+                            <div class="invoice-editable-component   sales_tax ">Tax name(%)</div>
+                            <div class="sales_tax d-flex">
+                                <span id="tax" class="invoice-editable-component"
+                                    onchange="getTotal(this)">20</span><span>%</span>
+                                <!-- <img  class="remove-item" src="deleteicon.png" alt="x" > -->
+                            </div>
+                        </div>
+                        <!-- <div class="d-flex add_new_item  mb12 pt8 "><img class="add_icon" src="plus.png" alt="+" class="mr4"><span>Add tax</span></div> -->
+                        <br>
+                        <div class="d-flex justify-content-between grand-total">
+                            <div class="invoice-editable-component ">Total</div><span class="grand-total">₹<span
+                                    id="net" onchange>120</span></span>
+                        </div>
+                    </div>
+                    <div class="invoice-editable-component-text-area"><span>Many thanks! I look forward
+                            to doing business with you again in due course. </span><br><span></span><br><span> Payment
+                            terms: to be received
+                            within 60 days.</span><br></div>
+                </div>
+            </div>
+            <div class="invoice_button cards d-flex flex-column flex-1 p-32"><button type="button"
+                    class="btn btn-primary" onclick="tprint('invoice_root')">Download this invoice</button></div>
+
+
+
+        </div>
+    </div>
+    <div id="features-section" class="features-section no-large-top">
+        <div class="container feature-items d-flex-c-c">
+            <div class="item">
+                <div class="image"><img alt="Seamless checkout experience"
+                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3MiIgaGVpZ2h0PSI3MiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDcyIDcyIj4KICAgIDxyZWN0IHdpZHRoPSI1NiIgaGVpZ2h0PSI0OCIgeD0iOCIgeT0iMTIiIGZpbGw9IiMxNDZFQjQiIGZpbGwtb3BhY2l0eT0iLjE1IiBzdHJva2U9IiMxNDZFQjQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSIzLjUiIHJ4PSI1Ii8+CiAgICA8cGF0aCBzdHJva2U9IiMxNDZFQjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIzLjUiIGQ9Ik0yNiAyN2w4LjMzMiAyMCAyLjk1OS04LjcxTDQ2IDM1LjMzMyAyNiAyN3oiLz4KPC9zdmc+Cg==">
+                </div>
+                <div class="title">Enter invoice details</div>
+                <div class="description"> Click and Edit the above mentioned details of your invoice.</div>
+            </div>
+            <div class="item">
+                <div class="image"><img alt="Easy to manage orders"
+                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3MiIgaGVpZ2h0PSI3MiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDcyIDcyIj4KICAgIDxwYXRoIGZpbGw9IiMxNDZFQjQiIGZpbGwtb3BhY2l0eT0iLjE1IiBzdHJva2U9IiMxNDZFQjQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSIzLjUiIGQ9Ik0zNiA2NGMxNS40NjQgMCAyOC0xMi41MzYgMjgtMjhTNTEuNDY0IDggMzYgOCA4IDIwLjUzNiA4IDM2czEyLjUzNiAyOCAyOCAyOHoiLz4KICAgIDxwYXRoIHN0cm9rZT0iIzE0NkVCNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjMuMiIgZD0iTTQ0IDMxbC04LTgtOCA4TTM2IDIzdjE5LjIiLz4KICAgIDxwYXRoIHN0cm9rZT0iIzE0NkVCNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjIuNiIgZD0iTTU0IDQwLjI4Nkw0OS43MTQgMzZsLTQuMjg1IDQuMjg2TTQ5LjcxNCAzNnYxMC4yODZNMjYuNTcxIDQwLjI4NkwyMi4yODYgMzYgMTggNDAuMjg2TTIyLjI4NiAzNnYxMC4yODYiLz4KPC9zdmc+Cg==">
+                </div>
+                <div class="title">Submit details</div>
+                <div class="description">Verify the details and submit. We'll take it forward from here.</div>
+            </div>
+            <div class="item">
+                <div class="image"><img alt="Check email"
+                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI3MiIgaGVpZ2h0PSI3MiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDcyIDcyIj4KICAgIDxwYXRoIGZpbGw9IiMxNDZFQjQiIGZpbGwtb3BhY2l0eT0iLjE1IiBzdHJva2U9IiMxNDZFQjQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSIzLjUiIGQ9Ik01NC42NjcgMTJIMTcuMzMzQzE0LjM4OCAxMiAxMiAxNC4zODggMTIgMTcuMzMzdjM3LjMzNEMxMiA1Ny42MTIgMTQuMzg4IDYwIDE3LjMzMyA2MGgzNy4zMzRDNTcuNjEyIDYwIDYwIDU3LjYxMiA2MCA1NC42NjdWMTcuMzMzQzYwIDE0LjM4OCA1Ny42MTIgMTIgNTQuNjY3IDEyeiIvPgogICAgPHBhdGggc3Ryb2tlPSIjMTQ2RUI0IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iMy41IiBkPSJNMTIgMjhoNDhNMjggNjBWMjgiLz4KPC9zdmc+Cg==">
+                </div>
+                <div class="title">Download Invoice</div>
+                <div class="description">Voila! Download the invoice and it is ready to share!</div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
